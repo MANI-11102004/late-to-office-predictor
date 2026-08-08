@@ -6,6 +6,11 @@
 
 🚀 **[Open the Late to Office Predictor](https://late-to-office-predictor.streamlit.app/)**
 
+## 📸 Application Preview
+
+![Late to Office Predictor](screenshots/app_screenshot1.png)
+![Late to Office Predictor](screenshots/app_screenshot2.png)
+
 ---
 
 ## 📌 About the Project
