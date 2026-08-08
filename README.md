@@ -105,3 +105,22 @@ Model Saving
 Streamlit Application
    ↓
 Streamlit Cloud Deployment
+
+## 📁 Project Structure
+
+```text
+LATE/
+│
+├── app.py
+├── train_model.py
+│
+├── late_to_office_dataset.csv
+├── late_to_office_model.pkl
+├── scaler.pkl
+│
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── Late.ipynb
+└── Late_Cleaned.ipynb
