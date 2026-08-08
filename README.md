@@ -8,8 +8,8 @@
 
 ## 📸 Application Preview
 
-![Late to Office Predictor](screenshots/app_screenshot1.png)
-![Late to Office Predictor](screenshots/app_screenshot2.png)
+![Late to Office Predictor](screenshots/App_ScreenShot1.png)
+![Late to Office Predictor](screenshots/App_ScreenShot2.png)
 
 ---
 
