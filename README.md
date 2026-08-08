@@ -1,62 +1,93 @@
 # 🚗 Late to Office Predictor
 
-A Machine Learning application that predicts whether a person is likely to be late to the office based on the distance they need to travel and the time remaining.
+> A Machine Learning web application that predicts whether a person is likely to be late to the office based on distance and remaining time.
 
 ## 🌐 Live Demo
 
-👉 https://late-to-office-predictor.streamlit.app/
+🚀 **[Open the Late to Office Predictor](https://late-to-office-predictor.streamlit.app/)**
 
-## 📌 Project Overview
+---
 
-This project uses Machine Learning to predict whether a person will be:
+## 📌 About the Project
 
-- ✅ On Time
-- ⚠️ Late
+The **Late to Office Predictor** is a Machine Learning application that predicts whether a person is likely to reach the office on time.
 
-The prediction is based on two inputs:
+The prediction is based on two factors:
 
-- Distance from home to office
-- Time remaining before the office deadline
+- 🚗 Distance from home to office
+- ⏱️ Time remaining before the deadline
+
+The application provides:
+
+- ✅ On-Time prediction
+- ⚠️ Late prediction
+- 📊 On-Time probability
+- 📊 Late probability
+- 🎯 Prediction confidence
+- 🖥️ Interactive Streamlit interface
+
+---
 
 ## 🧠 Machine Learning
 
-The main model used in this project is:
+The main Machine Learning model used in this project is:
 
-**Logistic Regression**
+### Logistic Regression
 
-The project also includes a **Decision Tree** model for comparison.
+A **Decision Tree Classifier** is also trained for comparison.
+
+### Model Accuracy
+
+| Model | Accuracy |
+|:---|---:|
+| Logistic Regression | **99.33%** |
+| Decision Tree | **99.67%** |
+
+---
 
 ## 📊 Dataset
 
-The dataset contains **1,000 records** with balanced classes:
+The dataset contains **1,000 balanced samples**.
 
-- 500 On-Time samples
-- 500 Late samples
+| Class | Number of Samples |
+|:---|---:|
+| 🟢 On Time | 500 |
+| 🔴 Late | 500 |
+| **Total** | **1,000** |
 
 ### Features
 
 | Feature | Description |
-|---|---|
+|:---|:---|
 | `distance_km` | Distance from home to office in kilometers |
-| `time_left_minutes` | Time remaining in minutes |
+| `time_left_minutes` | Time remaining before the deadline |
 | `will_be_late` | Target variable |
 
 ### Target Values
 
-```text
-0 → On Time
-1 → Late
+| Value | Meaning |
+|:---:|:---|
+| `0` | 🟢 On Time |
+| `1` | 🔴 Late |
 
-🛠️ Technologies Used
-Python
-Pandas
-NumPy
-Scikit-learn
-Joblib
-Streamlit
-Git
-GitHub
-🔄 Machine Learning Workflow
+---
+
+## 🛠️ Technologies Used
+
+- 🐍 Python
+- 🐼 Pandas
+- 🔢 NumPy
+- 🤖 Scikit-learn
+- 📦 Joblib
+- 🎈 Streamlit
+- 🔧 Git
+- 🐙 GitHub
+
+---
+
+## 🔄 Machine Learning Workflow
+
+```text
 Dataset
    ↓
 Data Preprocessing
@@ -73,46 +104,4 @@ Model Saving
    ↓
 Streamlit Application
    ↓
-Cloud Deployment
-📁 Project Structure
-LATE/
-│
-├── app.py
-├── train_model.py
-├── late_to_office_dataset.csv
-├── late_to_office_model.pkl
-├── scaler.pkl
-├── requirements.txt
-├── README.md
-├── .gitignore
-├── Late.ipynb
-└── Late_Cleaned.ipynb
-▶️ Run Locally
-1. Install dependencies
-pip install -r requirements.txt
-2. Train the model
-python train_model.py
-3. Run the Streamlit application
-streamlit run app.py
-
-The application will open at:
-
-http://localhost:8501
-🚀 Deployment
-
-The application is deployed using Streamlit Community Cloud.
-
-Live Application
-
-👉 https://late-to-office-predictor.streamlit.app/
-
-🔮 Future Improvements
-Traffic conditions
-Weather conditions
-Average travel speed
-Real-time location
-Map integration
-More Machine Learning models
-👨‍💻 Author
-
-Mani Shankar
+Streamlit Cloud Deployment
