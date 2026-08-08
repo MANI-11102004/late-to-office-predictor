@@ -3,9 +3,9 @@ import pandas as pd
 import joblib
 
 
-# ==========================================
-# Page Configuration
-# ==========================================
+# =========================================================
+# PAGE CONFIGURATION
+# =========================================================
 
 st.set_page_config(
     page_title="Late to Office Predictor",
@@ -14,16 +14,16 @@ st.set_page_config(
 )
 
 
-# ==========================================
-# Custom CSS
-# ==========================================
+# =========================================================
+# CUSTOM CSS
+# =========================================================
 
 st.markdown(
     """
     <style>
 
     .main-title {
-        font-size: 2.6rem;
+        font-size: 2.8rem;
         font-weight: 700;
         text-align: center;
         margin-bottom: 0.2rem;
@@ -32,21 +32,22 @@ st.markdown(
     .subtitle {
         text-align: center;
         color: #6b7280;
+        font-size: 1.05rem;
         margin-bottom: 2rem;
     }
 
-    .result-card {
-        padding: 1.2rem;
-        border-radius: 14px;
-        margin-top: 1rem;
+    .info-box {
+        padding: 1rem;
+        border-radius: 12px;
         border: 1px solid rgba(128,128,128,0.25);
+        margin-bottom: 1rem;
     }
 
     div.stButton > button {
         width: 100%;
-        font-weight: 600;
         border-radius: 10px;
-        padding: 0.65rem;
+        font-weight: 600;
+        padding: 0.7rem;
     }
 
     </style>
@@ -55,9 +56,9 @@ st.markdown(
 )
 
 
-# ==========================================
-# Load Model and Scaler
-# ==========================================
+# =========================================================
+# LOAD MODEL
+# =========================================================
 
 @st.cache_resource
 def load_model():
@@ -76,9 +77,9 @@ def load_model():
 model, scaler = load_model()
 
 
-# ==========================================
-# Header
-# ==========================================
+# =========================================================
+# HEADER
+# =========================================================
 
 st.markdown(
     '<div class="main-title">🚗 Late to Office Predictor</div>',
@@ -93,19 +94,20 @@ st.markdown(
 )
 
 
-# ==========================================
-# Sidebar
-# ==========================================
+# =========================================================
+# SIDEBAR
+# =========================================================
 
 with st.sidebar:
 
-    st.header("ℹ️ About")
+    st.header("ℹ️ About This Project")
 
     st.write(
         """
-        This application uses a Machine Learning model
-        to predict whether a person is likely to be late
-        based on:
+        This application uses Machine Learning to predict
+        whether a person is likely to be late to the office.
+
+        The prediction is based on:
 
         • Distance from home
 
@@ -115,21 +117,27 @@ with st.sidebar:
 
     st.divider()
 
-    st.caption(
-        "Model: Logistic Regression"
-    )
+    st.subheader("🤖 Model")
+
+    st.write("Logistic Regression")
+
+    st.subheader("📊 Features")
+
+    st.write("Distance (km)")
+    st.write("Time Left (minutes)")
+
+    st.divider()
 
     st.caption(
-        "Features: Distance + Time Left"
+        "Built with Python, Scikit-learn and Streamlit"
     )
 
 
-# ==========================================
-# User Input
-# ==========================================
+# =========================================================
+# INPUT SECTION
+# =========================================================
 
-st.subheader("📍 Trip Details")
-
+st.subheader("📍 Enter Your Trip Details")
 
 col1, col2 = st.columns(2)
 
@@ -137,7 +145,7 @@ col1, col2 = st.columns(2)
 with col1:
 
     distance = st.number_input(
-        "Distance (km)",
+        "🚗 Distance (km)",
         min_value=0.0,
         max_value=100.0,
         value=10.0,
@@ -148,7 +156,7 @@ with col1:
 with col2:
 
     time_left = st.number_input(
-        "Time left (minutes)",
+        "⏱️ Time Left (minutes)",
         min_value=1,
         max_value=180,
         value=30,
@@ -156,17 +164,15 @@ with col2:
     )
 
 
-st.caption(
-    "Enter the distance from home and the time remaining."
-)
+st.write("")
 
 
-# ==========================================
-# Prediction Button
-# ==========================================
+# =========================================================
+# PREDICTION BUTTON
+# =========================================================
 
 if st.button(
-    "🔮 Predict",
+    "🔮 Predict My Arrival",
     type="primary"
 ):
 
@@ -202,13 +208,20 @@ if st.button(
     late_probability = probabilities[1]
 
 
-    # ==========================================
-    # Results
-    # ==========================================
+    # Confidence
+    confidence = max(
+        on_time_probability,
+        late_probability
+    )
+
+
+    # =====================================================
+    # RESULT
+    # =====================================================
 
     st.divider()
 
-    st.subheader("📊 Prediction")
+    st.subheader("📊 Prediction Result")
 
 
     if prediction == 1:
@@ -217,16 +230,29 @@ if st.button(
             "⚠️ You are likely to be late."
         )
 
+        explanation = (
+            "Based on the distance and remaining time, "
+            "the model predicts a higher chance of arriving late."
+        )
+
     else:
 
         st.success(
-            "✅ You are likely to reach on time."
+            "✅ You are likely to reach on time!"
+        )
+
+        explanation = (
+            "Based on the distance and remaining time, "
+            "the model predicts a higher chance of arriving on time."
         )
 
 
-    # ==========================================
-    # Probability Metrics
-    # ==========================================
+    st.info(explanation)
+
+
+    # =====================================================
+    # PROBABILITIES
+    # =====================================================
 
     col1, col2 = st.columns(2)
 
@@ -234,7 +260,7 @@ if st.button(
     with col1:
 
         st.metric(
-            "On-Time Probability",
+            "🟢 On-Time Probability",
             f"{on_time_probability * 100:.1f}%"
         )
 
@@ -242,38 +268,32 @@ if st.button(
     with col2:
 
         st.metric(
-            "Late Probability",
+            "🔴 Late Probability",
             f"{late_probability * 100:.1f}%"
         )
 
 
-    # ==========================================
-    # Confidence
-    # ==========================================
+    # =====================================================
+    # CONFIDENCE
+    # =====================================================
 
-    confidence = max(
-        on_time_probability,
-        late_probability
-    )
-
-
-    st.write("### Confidence")
+    st.write("### 🎯 Model Confidence")
 
     st.progress(
         confidence
     )
 
-
     st.write(
-        f"Model confidence: **{confidence * 100:.1f}%**"
+        f"The model's confidence is "
+        f"**{confidence * 100:.1f}%**."
     )
 
 
-    # ==========================================
-    # Input Summary
-    # ==========================================
+    # =====================================================
+    # INPUT SUMMARY
+    # =====================================================
 
-    st.write("### 📋 Input Summary")
+    st.write("### 📋 Trip Summary")
 
     col1, col2 = st.columns(2)
 
@@ -289,18 +309,17 @@ if st.button(
     with col2:
 
         st.metric(
-            "Time Left",
+            "Time Remaining",
             f"{time_left} min"
         )
 
 
-# ==========================================
-# Footer
-# ==========================================
+# =========================================================
+# FOOTER
+# =========================================================
 
 st.divider()
 
 st.caption(
-    "Educational Machine Learning Project • "
-    "Logistic Regression • Streamlit"
+    "Late to Office Predictor • Machine Learning Project"
 )
