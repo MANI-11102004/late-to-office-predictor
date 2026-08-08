@@ -1,8 +1,10 @@
-# 🚗 Late to Office Predictor
+🚗 Late to Office Predictor
 
-> A Machine Learning web application that predicts whether a person is likely to be late to the office based on distance and remaining time.
+[Python] [Streamlit] [Scikit-learn] [GitHub]
 
-## 🌐 Live Demo
+A Machine Learning web application...
+
+🌐 Live Demo
 
 🚀 **[Open the Late to Office Predictor](https://late-to-office-predictor.streamlit.app/)**
 
